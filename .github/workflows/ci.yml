@@ -2,9 +2,9 @@ name: build-and-lint
 
 on:
   push:
-    branches: [dev]
+    branches: [master]
   pull_request:
-    branches: [dev]
+    branches: [master]
 
 jobs:
   build-and-lint:
