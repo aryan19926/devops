@@ -121,6 +121,7 @@ export default function App() {
 
         <form className="composer" onSubmit={handleSubmit}>
           <input
+            id="add-task"
             type="text"
             value={text}
             onChange={(event) => setText(event.target.value)}

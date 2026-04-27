@@ -13,4 +13,8 @@ This allows you to run each part of your app in its own container, which is a co
 You can use tools like Docker Compose to define and run both containers together, making it easy to manage multi-container applications.
 
 
-https://docs.docker.com/get-started/docker-overview/#what-can-i-use-docker-for
+https://docs.docker.com/get-started/docker-overview/#what-can-i-use-docker-for 
+
+
+
+To build the image, you'll need to use a Dockerfile. A Dockerfile is simply a text-based file with no file extension that contains a script of instructions. Docker uses this script to build a container image.
