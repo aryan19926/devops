@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001/api";
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
 
 export default function App() {
   const [todos, setTodos] = useState([]);
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   async function loadTodos() {
     try {
       setLoading(true);
-      setError("");
+      setError('');
 
       const response = await fetch(`${API_URL}/todos`);
       if (!response.ok) {
-        throw new Error("Failed to load todos.");
+        throw new Error('Failed to load todos.');
       }
 
       const data = await response.json();
@@ -41,24 +41,24 @@ export default function App() {
 
     try {
       setSaving(true);
-      setError("");
+      setError('');
 
-      console.log("making post call to add todo");
+      console.log('making post call to add todo');
       const response = await fetch(`${API_URL}/todos`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ text }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create todo.");
+        throw new Error('Failed to create todo.');
       }
 
       const todo = await response.json();
       setTodos((currentTodos) => [todo, ...currentTodos]);
-      setText("");
+      setText('');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -68,23 +68,23 @@ export default function App() {
 
   async function toggleTodo(todo) {
     try {
-      setError("");
+      setError('');
 
       const response = await fetch(`${API_URL}/todos/${todo._id}`, {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ done: !todo.done }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to update todo.");
+        throw new Error('Failed to update todo.');
       }
 
       const updatedTodo = await response.json();
       setTodos((currentTodos) =>
-        currentTodos.map((item) => (item._id === updatedTodo._id ? updatedTodo : item))
+        currentTodos.map((item) => (item._id === updatedTodo._id ? updatedTodo : item)),
       );
     } catch (err) {
       setError(err.message);
@@ -93,14 +93,14 @@ export default function App() {
 
   async function deleteTodo(id) {
     try {
-      setError("");
+      setError('');
 
       const response = await fetch(`${API_URL}/todos/${id}`, {
-        method: "DELETE",
+        method: 'DELETE',
       });
 
       if (!response.ok) {
-        throw new Error("Failed to delete todo.");
+        throw new Error('Failed to delete todo.');
       }
 
       setTodos((currentTodos) => currentTodos.filter((item) => item._id !== id));
@@ -128,7 +128,7 @@ export default function App() {
             placeholder="Add a task"
           />
           <button type="submit" disabled={saving}>
-            {saving ? "Saving..." : "Add"}
+            {saving ? 'Saving...' : 'Add'}
           </button>
         </form>
 
@@ -144,9 +144,9 @@ export default function App() {
 
         <ul className="todo-list">
           {todos.map((todo) => (
-            <li key={todo._id} className={todo.done ? "todo-card done" : "todo-card"}>
+            <li key={todo._id} className={todo.done ? 'todo-card done' : 'todo-card'}>
               <button className="toggle" onClick={() => toggleTodo(todo)} type="button">
-                {todo.done ? "Done" : "Open"}
+                {todo.done ? 'Done' : 'Open'}
               </button>
               <span>{todo.text}</span>
               <button className="delete" onClick={() => deleteTodo(todo._id)} type="button">
