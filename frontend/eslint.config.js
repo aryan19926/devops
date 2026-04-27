@@ -1,5 +1,6 @@
 import js from '@eslint/js';
 import globals from 'globals';
+import react from 'eslint-plugin-react';
 
 export default [
   {
@@ -18,9 +19,21 @@ export default [
         ...globals.browser,
       },
     },
+    plugins: {
+      react,
+    },
     rules: {
       semi: ['error', 'always'],
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      // JSX IDs like <App /> count as references for no-unused-vars
+      'react/jsx-uses-vars': 'warn',
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
     },
   },
 ];
